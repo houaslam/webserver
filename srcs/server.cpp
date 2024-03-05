@@ -1,8 +1,8 @@
 #include "../includes/Server.hpp"
 
-void Server::handle_request(std::string request){
+// void Server::handle_request(std::string request){
     
-}
+// }
 
 Server::Server(int domain, int type, int protocol, int port, u_long interface) : WebServer(domain, type, protocol, port, interface){
 }

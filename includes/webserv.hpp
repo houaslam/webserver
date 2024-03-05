@@ -14,6 +14,7 @@
 #include <fstream>
 #include <cstring>
 #include <unistd.h>
+#include <arpa/inet.h>
 
 class WebServer{
     protected:

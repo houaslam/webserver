@@ -9,7 +9,7 @@ std::string nb_to_string(int nb){
 }
 
 int main(){
-    Server web(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
+    Server web(AF_INET, SOCK_STREAM, 0, 8080, inet_addr("127.0.0.1")); // <----- multiplexing part
     std::string response;
     std::string file;
     char request[1024];
@@ -21,17 +21,18 @@ int main(){
 
     response = "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello, World!";;
     while (true) {
-        int clientSocket = accept(web.get_socket(), NULL, NULL);
-        if (clientSocket == -1) {
-            std::cerr << "Error accepting connection\n";
-            break;
-        }
-        read(clientSocket, request, sizeof(request));
-        
-        std::cout << "\nCLIENT REQUEST:\n" << request << std::endl;
-        send(clientSocket, response.c_str(),response.length(), 0);
-        // std::cout << "server response sent!\n";
+		int clientSocket = accept(web.get_socket(), NULL, NULL);
+		if (clientSocket == -1) {
+		    std::cerr << "Error accepting connection\n";
+		    break;
+		}
+		read(clientSocket, request, sizeof(request)); // <<------- request part
 
-        close(clientSocket);
+		std::cout << "\nCLIENT REQUEST:\n" << request << std::endl;
+		send(clientSocket, response.c_str(),response.length(), 0); // <----response part
+		std::cout << "\nDONE\n" << request << std::endl;
+
+		// std::cout << "server response sent!\n";
+		close(clientSocket);
     }
 }
