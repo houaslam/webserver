@@ -4,7 +4,7 @@ CC += -fsanitize=address -g3
 CFLAGS = -Wall -Wextra -Werror
 EXTRA_CFLAGS = -std=c++98
 
-SRC = main.cpp \
+SRC = srcs/main.cpp \
 	  srcs/server.cpp \
 	  srcs/webserver.cpp \
 	  srcs/client.cpp \

@@ -8,8 +8,8 @@ WebServer::WebServer(int domaine, int type, int protocol, int port, u_long inter
     _socket = socket(domaine, type, protocol);
 
     if (_socket < 0){
-        std::cerr << "socket creation problem!" << std::endl;
-        exit(EXIT_FAILURE);
+        perror("socket creation problem!");
+        exit(1);
     }
 }
 

@@ -31,3 +31,12 @@ void Response::Get(Request& request){
     std::cout << "GET method called!" << request.get_httpv() << std::endl;
 }
 
+// SETERS
+void Response::set_status(int status){
+    this->status = status;
+}
+
+// GETERS 
+int Response::get_status() const{
+    return this->status;
+}

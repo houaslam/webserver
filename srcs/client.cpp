@@ -2,9 +2,10 @@
   
 Client::Client(Server &server): WebServer(AF_INET, SOCK_STREAM, 0, 0, 0){
     this->_socket = accept(server.get_socket(), NULL, NULL);
-    // std::cout << "here--->" << server.get_socket() << std::endl;
-    if (this->_socket < 0)
-        throw std::runtime_error("socket creation failed!");
+    if (this->_socket < 0){
+        perror("socket creation failed!");
+        exit(1);
+    }
 }
 
 Client::Client(Client& src) : WebServer(src){
@@ -22,6 +23,10 @@ Client::Client(Client& src) : WebServer(src){
 Client::~Client(){
     close(this->_socket);
 }
+
+// int Client::setup_(Server& server){
+//     if (accept(this->_socket, (struct sockaddr*)&server.get_addr(), (socklen_t *)sizeof(server.get_addr())));
+// }
 
 
 int Client::setup(){

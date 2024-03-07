@@ -22,13 +22,13 @@ void Server::parseRequest(std::string request){
 
 int Server::setup(){
     if (bind(_socket, (struct sockaddr*)&s_addr, sizeof(s_addr)) < 0){
-        std::cerr << "bind failed!" << std::endl;
-        return 1;
+        perror("bind failed!");
+        exit(1);
     }
 
     if (listen(_socket, 5) < 0){
-        std::cerr << "listen failed!" << std::endl;
-        return 1;
+        perror("listen failed!");
+        exit(1);
     }
     std::cout << "setup done!\n";
     return 0;
@@ -42,8 +42,10 @@ void Server::generateResponse(Request& request){
         response.Get(request);
     else if (!request.get_method().compare("DELETE"))
         response.Delete(request);
-    else
-        throw std::runtime_error("INVALID METHOD");
+    else{
+        perror("INVALID METHOD");
+        exit(EXIT_FAILURE);
+    }
 }
 
 
