@@ -7,7 +7,11 @@ EXTRA_CFLAGS = -std=c++98
 SRC = main.cpp \
 	  srcs/server.cpp \
 	  srcs/webserver.cpp \
-	  srcs/client.cpp
+	  srcs/client.cpp \
+	  srcs/outils.cpp \
+	  srcs/response.cpp \
+	  srcs/request.cpp
+
 
 OBJ = ${SRC:.cpp=.o}
 
