@@ -25,6 +25,15 @@ struct sockaddr_in& WebServer::get_addr(){
     return this->s_addr;
 }
 
+socklen_t  WebServer::get_addr_len(){
+    return sizeof(this->s_addr);
+}
+
+// socklen_t WebServer::get_addr_len() {
+//     return sizeof(this->s_addr);
+// }
+
+
 WebServer::WebServer(WebServer& src){
     if (this != &src){
         this->_socket = src._socket;

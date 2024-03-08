@@ -16,16 +16,17 @@
 #include <string>
 
 class WebServer{
-    protected:
-        int _socket;
-        struct sockaddr_in s_addr;
-    public:
-        WebServer(int domaine, int type, int protocol, int port, u_long interface);
-        ~WebServer();
-        WebServer(WebServer& src);
-        int get_socket();
-        struct sockaddr_in& get_addr();
-        virtual int  setup() = 0;
+	protected:
+		int _socket;
+		struct sockaddr_in s_addr;
+	public:
+		WebServer(int domaine, int type, int protocol, int port, u_long interface);
+		~WebServer();
+		WebServer(WebServer& src);
+		int get_socket();
+		struct sockaddr_in& get_addr();
+		socklen_t  get_addr_len();
+		virtual int  setup() = 0;
 };
 
 
