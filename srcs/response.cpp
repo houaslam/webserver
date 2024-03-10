@@ -38,7 +38,7 @@ void Response::Delete(Request& request){
 
 	file = "htmlFile" + request.get_path();
 	remove(file.c_str());
-	// response = httpv + " " + nb_to_string(status) + "\r\n";
+	response = httpv + " " + nb_to_string(status) + "\r\n";
 }
 
 void Response::Get(Request& request){
@@ -46,7 +46,7 @@ void Response::Get(Request& request){
 	// std::string file = "htmlFile" + request.get_path();
 	// std::ifstream req;
 	// std::string tmp;
-
+	// std::cout << file << std::endl;
 	// if (access( file.c_str(), F_OK ) < 0){
 	// 	request.set_path("/404.html");
 	// 	file = "htmlFile" + request.get_path();
