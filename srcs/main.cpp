@@ -1,15 +1,18 @@
 #include "../includes/webserv.hpp"
 #include "../includes/Server.hpp"
 #include "../includes/Client.hpp"
+#include "../includes/configIncludes/config.hpp"
 
 int main(){
 	Server server(AF_INET, SOCK_STREAM, 0, 8080, inet_addr("127.0.0.1"));
+	config conf;
 	char request[1024];
-    
+
+	conf.configParse(conf);
+
 	server.get_response().set_response("HTTP/1.1 200\r\nContent-Type: text/html\r\n\r\n");
 
 	while (true) {
-
 		std::cout << "\nWAITING\n";
 		Client client(server);
 		std::cout << server.get_response().get_response() << std::endl;

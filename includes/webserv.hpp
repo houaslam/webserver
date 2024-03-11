@@ -14,6 +14,10 @@
 #include <vector>
 #include <sys/socket.h>  
 #include <string>
+#include <cctype>
+#include "configIncludes/config.hpp"
+
+using namespace std;
 
 class WebServer{
 	protected:
@@ -30,5 +34,6 @@ class WebServer{
 };
 
 
-std::string nb_to_string(int nb);
-std::vector<std::string> split(std::string src, std::string s);
+string nb_to_string(int nb);
+vector<string> split(string src, string s);
+string strtrim(const string& str);

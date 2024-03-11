@@ -4,11 +4,18 @@
 #include "Request.hpp"
 #include "Response.hpp"
 
+using namespace std;
+
 class Server : public WebServer{
 	private:
 		Request request;
 		Response response;
 	public:
+
+	// confFile
+	std::map<std::string, std::string> conf;
+	void configParse(config& conf);
+
 	// CANONICAL FORM
 		Server(int domaine, int type, int protocol, int port, u_long interface);
 		Server(Server& src);

@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "sstream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iosfwd": "cpp",
+        "cctype": "cpp",
+        "iostream": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "cstring": "cpp",
+        "cstdlib": "cpp"
     }
 }
