@@ -3,7 +3,10 @@
 #include "../webserv.hpp"
 #include "servers.hpp"
 
-# define BRACKET 0
+# define LSBRACKET 0
+# define RSBRACKET 1
+# define SERVER 2
+# define ELEMENTS 3
 
 using namespace std;
 
@@ -11,6 +14,9 @@ class config{
     private:
         vector<servers> server;
     public:
+		int size; //how many servers we have
+		int locSize; //how many locations we have
+		
     // C FORM
     	config();
 		config(const config& src);
@@ -20,11 +26,20 @@ class config{
 
 	// SETERS
 		void setServers(vector<servers>& obj);
+		void setServer(servers &obj);
 
 	// GETERS
-		vector<servers>& getConfig();
+		vector<servers>& getServers();
 		
 	//Others
 		void configParse(config &config);
-		void serverParse(int &flag, string name, string content, config &config);
+		void serverParse(vector<int> &flags, string content);
+		void portParse(string content, config &config);
+		void serverNameParse(string content, config &config);
+		void rootParse(string content, config &config);
+		void maxBodyParse(string content, config &config);
+		
 };
+
+string getContent(string name, string line, size_t pos);
+int isLBrackets(string str);

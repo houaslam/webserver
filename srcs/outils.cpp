@@ -6,6 +6,28 @@ std::string nb_to_string(int nb){
     return test.str();
 }
 
+int string_to_number(string str){
+    int nb = 0;
+    stringstream ss(str);
+
+    ss >> nb;
+
+    return nb;
+}
+
+bool isInteger(const string& str){
+    if (str.empty())
+        return false;
+
+    for (size_t i = 0; i < str.size(); i++) {
+        if (!isdigit(str[i])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 std::vector<std::string> split(std::string src, std::string s) {
     std::vector<std::string> ret;
     std::string str;
@@ -72,4 +94,9 @@ std::string strtrim(const std::string& str) {
     }
 
     return str.substr(start, end - start);
+}
+
+void ft_error(string msg){
+    perror(msg.c_str());
+    exit(1);
 }

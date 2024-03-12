@@ -35,4 +35,8 @@ class servers{
 		string getServerName();
 		string getRoot();
 		// vector<locations>&  getLocations();
+	//OTHERS
+		vector<int> flags;
+		int index;
+
 };

@@ -1,7 +1,7 @@
 #include "../../includes/configIncludes/config.hpp"
 
 // C FORM
-config::config(){}
+config::config(): size(0), locSize(0){}
 
 config::~config(){}
 
@@ -21,8 +21,11 @@ config& config::operator=(const config& src){
 void config::setServers(vector<servers>& obj){
 	this->server = obj;
 }
+void config::setServer(servers &obj){
+	this->server.push_back(obj);
+}
 
 // GETERS
-vector<servers>& config::getConfig(){
+vector<servers>& config::getServers(){
 	return this->server;
 }

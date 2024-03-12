@@ -1,7 +1,14 @@
 #include "../../includes/configIncludes/config.hpp"
 
 // C FORM
-servers::servers(){}
+servers::servers():  maxBody(0),port(0), host("127.0.0.1"), serverName(""), \
+root(""){
+	index = 0;
+	for (size_t i = 0; i < 5; i++)
+	{
+		flags.push_back(0);
+	}
+}
 
 servers::~servers(){}
 
@@ -15,6 +22,8 @@ servers& servers::operator=(const servers& src){
 		this->host = src.host;
 		this->serverName = src.serverName;
 		this->root = src.root;
+		this->flags = src.flags;
+		this->index = src.index;
 		// this->location = src.location;
     }
 	return *this;

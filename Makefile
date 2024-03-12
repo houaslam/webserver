@@ -13,6 +13,8 @@ SRC = srcs/main.cpp \
 	  srcs/request.cpp
 
 CNF += confFile/parse.cpp \
+		confFile/confUtils.cpp \
+		confFile/serverParse.cpp \
 		srcs/configSrcs/config.cpp \
 		srcs/configSrcs/servers.cpp \
 		srcs/configSrcs/locations.cpp \
