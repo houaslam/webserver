@@ -12,9 +12,12 @@ class servers{
         string host;
         string serverName;
         string root;
-        // vector<locations> location;
+		string index;
+        vector<class locations> location;
     public:
-    // C FORM
+		int locSize; //how many locations we have
+    
+	// C FORM
     	servers();
 		servers(const servers& src);
 		servers& operator=(const servers& src);
@@ -26,17 +29,20 @@ class servers{
 		void setHost(string host);
 		void setServerName(string serverName);
 		void setRoot(string root);
-		// void setLocation(vector<locations>& location);
-
+		void setIndex(string index);
+		void setLocations(vector<locations>& location);
+		void setLocation(locations &obj);
+	
 	// GETERS
 		int getMaxBody();
 		int getPort();
 		string getHost();
 		string getServerName();
 		string getRoot();
-		// vector<locations>&  getLocations();
+		string getIndex();
+		vector<locations>&  getLocations();
 	//OTHERS
 		vector<int> flags;
-		int index;
+		int i;
 
 };

@@ -1,50 +1,96 @@
 #include "../includes/Server.hpp"
+#include "../includes/configIncludes/config.hpp"
 
-// void fill_map(std::string name, std::string content, config &config){
-//     // checkBasicErrors
-//     // if (name == "error_page"){
-//     // }
-//     if (name == "listen")
-//         name = "port";
-//     //check if ';' in the end later
+// string getContent(string name, string line, size_t pos){
+//     string content = "";
+//     content = strtrim(line.substr(pos, line.length()));
+//     if ((name != "server" && name != "{" && name != "}" && name != "location" \
+//     && name[0] != '#' && !line.empty()) && content[content.size() - 1] != ';') {
+//         std::cout << "[" << content << "]" << "\n";
+//         perror("Error in config file\n");
+// 		exit(1);
+//     }
 //     size_t semicolonPos = content.find(';');
-//     if (semicolonPos != std::string::npos) {
+//     if (semicolonPos != string::npos) {
 //         content.erase(semicolonPos, 1);
 //     }
-//     // server.conf.insert((std::make_pair(name, content)));
-//     // std::cout << " | " << name << " | \n" << content << std::endl; 
+//     return content;
 // }
 
-void parse_line(std::string line, config &config){
+void parse_line(string line, config &config){
     size_t pos;
-    std::string name;
-    std::string content;
-    // int flag[5];
-
-    config.getConfig();
+    string name;
+    string content;
 
     line = strtrim(line);
     pos = line.find_first_of(" \t");
-    if (pos == std::string::npos || line.empty())
-        return;
-    name = line.substr(0, pos);
-    content = strtrim(line.substr(pos, line.length()));
 
-    // if (name == "server")
-    //     config.serverParse(flag, name, content, config);
-    // fill_map(name, content, config);
-}
+    if (line.empty() || line[0] == '#')
+        return;
+    
+    name = line.substr(0, pos);
+
+    if (pos != string::npos || line.empty())
+        content = getContent(name, line, pos);
+
+    if (name == "server"){
+        servers server;
+        server.i = config.size++;
+        config.serverIsOpen = true;
+        config.serverParse(server.flags, content);
+        config.setServer(server);
+    }
+
+    if (name == "location")
+    {
+        if (config.serverIsOpen == false)
+            ft_error("Config file invalid\n");
+        locations location;
+        config.locationIsOpen = true;
+        location.i = config.getServers()[config.size - 1].locSize++;
+        //parse func
+        config.getServers()[config.size - 1].setLocation(location);
+
+    }
+        // config.portParse(content, config);
+
+    if (name == "listen")
+        config.portParse(content, config);
+    if (name == "host" && content != "127.0.0.1"){
+        ft_error("invalid host");
+    }
+    if (name == "server_name")
+        config.serverNameParse(content, config);
+    if (name == "root")
+        config.rootParse(content, config);
+    if (name == "client_max_body_size")
+        config.maxBodyParse(content, config);
+    // if (name == "index")
+    //     config.indexParse(content, config);
+
+}//RSBRACKET IN THE END: CHECK IF THE IMPORTANT 5 ELEMENTS ARE THERE
 
 void config::configParse(config &config){
-    std::string filename = "/nfs/homes/fadermou/Desktop/webserver/confFile/files/default";
-    std::ifstream ifs(filename.c_str());
+    string filename = "/nfs/homes/fadermou/Desktop/webserver/confFile/files/default";
+    ifstream ifs(filename.c_str());
 
     if (!ifs.is_open())
             return ; //add error cases
 
-    std::string line;
+    string line;
+    serverIsOpen = 0;
+    locationIsOpen = 0;
 
     while (getline(ifs, line)){
         parse_line(line, config);
     }
+    for (int i = 0; i < config.size; i++)
+    {
+        std::cout << "Port = [" << config.getServers()[i].getPort() << "]" << std::endl; 
+        std::cout << "Host = [" << config.getServers()[i].getHost() << "]" << std::endl; 
+        std::cout << "ServerName = [" << config.getServers()[i].getServerName() << "]" << std::endl; 
+        std::cout << "root = [" << config.getServers()[i].getRoot() << "]" << std::endl; 
+        std::cout << "maxBodySize = [" << config.getServers()[i].getMaxBody() << "]" << std::endl; 
+    }
+    
 }

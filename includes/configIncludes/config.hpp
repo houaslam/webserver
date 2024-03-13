@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../webserv.hpp"
+#include "locations.hpp"
 #include "servers.hpp"
 
 # define LSBRACKET 0
@@ -15,7 +16,8 @@ class config{
         vector<servers> server;
     public:
 		int size; //how many servers we have
-		int locSize; //how many locations we have
+		bool serverIsOpen;
+		bool locationIsOpen;
 		
     // C FORM
     	config();
@@ -38,6 +40,7 @@ class config{
 		void serverNameParse(string content, config &config);
 		void rootParse(string content, config &config);
 		void maxBodyParse(string content, config &config);
+		void indexParse(string content, config &config);
 		
 };
 

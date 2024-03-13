@@ -1,7 +1,10 @@
 #include "../../includes/configIncludes/config.hpp"
 
 // C FORM
-config::config(): size(0), locSize(0){}
+config::config(): size(0){
+	serverIsOpen = false;
+	locationIsOpen = false;
+}
 
 config::~config(){}
 
@@ -17,7 +20,7 @@ config& config::operator=(const config& src){
 	return *this;
 }
 
-// SETTER
+// SETTERS
 void config::setServers(vector<servers>& obj){
 	this->server = obj;
 }

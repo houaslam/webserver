@@ -6,6 +6,7 @@ using namespace std;
 class locations{
     private:
 		string root;
+		string index;
     public:
     // C FORM
     	locations();
@@ -15,9 +16,12 @@ class locations{
 
 	// SETERS
 		void setRoot(string root);
-		// void setServers(vector<servers>& obj);//do the same to all of them
+		void setIndex(string index);
 
 	// GETERS
 		string getRoot();
-		// vector<servers>& getLocations();
+		string getIndex();
+
+	// OTHERS
+		int i;
 };
